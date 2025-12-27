@@ -1,0 +1,84 @@
+/* This is the styling file */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    width: 350px;
+    height: 600px;
+    border-radius: 30px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.logo {
+    margin-top: 50px;
+}
+
+.icon {
+    background: #4a6fa5;
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.app-name {
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+.welcome-box {
+    margin: 80px 0;
+}
+
+.welcome-box h2 {
+    color: #7f8c8d;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.main-title {
+    color: #2c3e50;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.continue-btn {
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    font-size: 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 40px;
+    width: 100%;
+    font-weight: bold;
+}
+
+.continue-btn:hover {
+    background: #3a5a80;
+}
+
+.footer {
+    color: #95a5a6;
+    font-size: 14px;
+    margin-top: 60px;
+}

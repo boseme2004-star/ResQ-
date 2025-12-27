@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Medi Safe - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Extra styles just for login page */
+        .login-container {
+            background: white;
+            width: 350px;
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .title {
+            color: #2c3e50;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .input-group label {
+            display: block;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        
+        .input-group input:focus {
+            border-color: #4a6fa5;
+            outline: none;
+        }
+        
+        .login-btn {
+            background: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        
+        .login-btn:hover {
+            background: #3a5a80;
+        }
+        
+        .signup-link {
+            margin-top: 30px;
+            color: #7f8c8d;
+        }
+        
+        .signup-link a {
+            color: #4a6fa5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #4a6fa5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button to go to launch screen -->
+    <button class="back-btn" onclick="goBack()">←</button>
+    
+    <div class="login-container">
+        <!-- Logo -->
+        <div style="margin-bottom: 30px;">
+            <div style="background: #4a6fa5; width: 60px; height: 60px; border-radius: 15px; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 30px;">
+                🚑
+            </div>
+        </div>
+        
+        <!-- Title -->
+        <h1 class="title">Hello</h1>
+        <h2 class="subtitle">Welcome Back</h2>
+        
+        <!-- Login Form -->
+        <form id="loginForm">
+            <!-- Name Input -->
+            <div class="input-group">
+                <label>Your name</label>
+                <input type="text" placeholder="Enter your name" id="nameInput">
+            </div>
+            
+            <!-- Password Input -->
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" placeholder="Enter your password" id="passwordInput">
+            </div>
+            <div style="text-align: right; margin-top: 5px;">
+    <small>
+        <a href="#" onclick="togglePassword()" style="color: #4a6fa5; text-decoration: none;">
+            👁 Show Password
+        </a>
+    </small>
+</div>
+            
+            <!-- Sign In Button -->
+            <button type="button" class="login-btn" onclick="login()">Sign in</button>
+        </form>
+        
+        <!-- Sign Up Link -->
+        <div class="signup-link">
+            Don't have an account? <a href="#" onclick="signUp()">Sign Up</a>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+    var passInput = document.getElementById('passwordInput');
+    var toggleLink = event.target;
+    
+    if(passInput.type === 'password') {
+        passInput.type = 'text';
+        toggleLink.textContent = '👁️ Hide Password';
+    } else {
+        passInput.type = 'password';
+        toggleLink.textContent = '👁️ Show Password';
+    }
+}
+        // Function to go back to launch screen
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+        
+        // Function for login
+        function login() {
+            var name = document.getElementById('nameInput').value;
+            var password = document.getElementById('passwordInput').value;
+            var button = document.querySelector('.login-btn');
+            
+            // Simple validation
+            if(name === '' || password === '') {
+                alert('Please fill in both fields');
+                return;
+            }
+            
+            // Show loading
+            button.innerHTML = 'Signing in...';
+            button.style.background = '#2c3e50';
+            button.disabled = true;
+            
+            // Simulate login process
+            setTimeout(function() {
+                alert('Welcome ' + name + '!');
+                // Here you would normally go to the main app screen
+                // window.location.href = 'main.html';
+                
+                // Reset button
+                button.innerHTML = 'Sign in';
+                button.style.background = '#4a6fa5';
+                button.disabled = false;
+            }, 1500);
+        }
+        
+        // Function for sign up
+        function signUp() {
+            alert('Sign Up screen coming soon!');
+            // window.location.href = 'signup.html';
+        }
+        
+        // Allow pressing Enter to login
+        document.addEventListener('keydown', function(event) {
+            if(event.key === 'Enter') {
+                login();
+            }
+        });
+    </script>
+</body>
+</html>
