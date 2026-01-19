@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ResQ+ - First Aid Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .user-name {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .home-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        /* Main Content Container */
+        .screen-container {
+            display: flex;
+            width: 200%; /* 2 screens: guide and empty */
+            height: calc(100vh - 120px);
+            transition: transform 0.3s ease;
+        }
+        
+        .screen {
+            width: 50%; /* Each screen takes 1/2 of container */
+            height: 100%;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        /* GUIDE SCREEN */
+        .guide-screen {
+            background: #1a1a2e;
+        }
+        
+        .guide-category {
+            margin-bottom: 25px;
+        }
+        
+        .category-title {
+            color: #4fc3f7;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #4fc3f7;
+        }
+        
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .guide-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .guide-item:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+        }
+        
+        .guide-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .guide-name {
+            font-size: 12px;
+            color: #ccc;
+        }
+        
+        /* Modal for detailed guide */
+        .guide-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .guide-content {
+            background: #1a1a2e;
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 500px;
+            margin: 20px auto;
+            border: 2px solid #4fc3f7;
+        }
+        
+        .guide-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .guide-title {
+            font-size: 24px;
+            color: #4fc3f7;
+            margin-bottom: 10px;
+        }
+        
+        .guide-steps {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .step-item {
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 3px solid #4fc3f7;
+        }
+        
+        .close-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        /* Navigation Dots */
+        .nav-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            position: fixed;
+            bottom: 70px;
+            left: 0;
+            right: 0;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .dot.active {
+            background: #4fc3f7;
+        }
+        
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .emergency-contacts-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        /* Quick links in guide screen */
+        .quick-links {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        
+        .quick-link {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 10px;
+            color: white;
+            font-size: 12px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+    <!-- For icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="user-name">First Aid Guide</div>
+        <button class="home-btn" onclick="goToHome()">
+            <i class="fas fa-home"></i>
+        </button>
+    </div>
+    
+    <!-- Swipeable Screens Container -->
+    <div class="screen-container" id="screenContainer">
+        <!-- SCREEN 1: FIRST AID GUIDE -->
+        <div class="screen guide-screen">
+            <h2 style="margin-bottom: 20px; text-align: center;">Emergency Guides</h2>
+            
+            <!-- Quick Links -->
+            <div class="quick-links">
+                <div class="quick-link" onclick="showGuide('medical')">
+                    <i class="fas fa-heartbeat"></i><br>Medical
+                </div>
+                <div class="quick-link" onclick="showGuide('injury')">
+                    <i class="fas fa-user-injured"></i><br>Injury
+                </div>
+                <div class="quick-link" onclick="showGuide('safety')">
+                    <i class="fas fa-shield-alt"></i><br>Safety
+                </div>
+                <div class="quick-link" onclick="showGuide('disaster')">
+                    <i class="fas fa-house-damage"></i><br>Disaster
+                </div>
+            </div>
+            
+            <!-- MEDICAL EMERGENCIES -->
+            <div class="guide-category">
+                <h3 class="category-title"><i class="fas fa-heartbeat"></i> Medical Emergencies</h3>
+                <div class="guide-grid">
+                    <div class="guide-item" onclick="showDetailedGuide('allergic')">
+                        <div class="guide-icon">🤧</div>
+                        <div class="guide-name">Allergic Reactions</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('food-poisoning')">
+                        <div class="guide-icon">🤢</div>
+                        <div class="guide-name">Food Poisoning</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('abdominal-cramps')">
+                        <div class="guide-icon">🤕</div>
+                        <div class="guide-name">Abdominal Cramps</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('seizures')">
+                        <div class="guide-icon">⚡</div>
+                        <div class="guide-name">Seizures</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('asthma')">
+                        <div class="guide-icon">😮‍💨</div>
+                        <div class="guide-name">Asthma Attack</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- INJURY & TRAUMA -->
+            <div class="guide-category">
+                <h3 class="category-title"><i class="fas fa-user-injured"></i> Injury & Trauma</h3>
+                <div class="guide-grid">
+                    <div class="guide-item" onclick="showDetailedGuide('bleeding')">
+                        <div class="guide-icon">🩸</div>
+                        <div class="guide-name">Severe Bleeding</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('fractures')">
+                        <div class="guide-icon">🦴</div>
+                        <div class="guide-name">Fractures</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('burns')">
+                        <div class="guide-icon">🔥</div>
+                        <div class="guide-name">Burns</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('cpr')">
+                        <div class="guide-icon">💓</div>
+                        <div class="guide-name">CPR Guidance</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('choking')">
+                        <div class="guide-icon">🗣️</div>
+                        <div class="guide-name">Choking</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SAFETY & SECURITY -->
+            <div class="guide-category">
+                <h3 class="category-title"><i class="fas fa-shield-alt"></i> Safety & Security</h3>
+                <div class="guide-grid">
+                    <div class="guide-item" onclick="showDetailedGuide('theft')">
+                        <div class="guide-icon">💰</div>
+                        <div class="guide-name">Theft</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('assault')">
+                        <div class="guide-icon">👊</div>
+                        <div class="guide-name">Assault</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('harassment')">
+                        <div class="guide-icon">⚠️</div>
+                        <div class="guide-name">Harassment</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('suspicious')">
+                        <div class="guide-icon">👁️</div>
+                        <div class="guide-name">Suspicious Behavior</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- DISASTERS & ACCIDENTS -->
+            <div class="guide-category">
+                <h3 class="category-title"><i class="fas fa-house-damage"></i> Disasters & Accidents</h3>
+                <div class="guide-grid">
+                    <div class="guide-item" onclick="showDetailedGuide('transport-accidents')">
+                        <div class="guide-icon">🚗</div>
+                        <div class="guide-name">Transport Accidents</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('fire')">
+                        <div class="guide-icon">🧯</div>
+                        <div class="guide-name">Fire</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('floods')">
+                        <div class="guide-icon">🌊</div>
+                        <div class="guide-name">Floods</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('gas-leaks')">
+                        <div class="guide-icon">💨</div>
+                        <div class="guide-name">Gas Leaks</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('building-collapse')">
+                        <div class="guide-icon">🏗️</div>
+                        <div class="guide-name">Building Collapse</div>
+                    </div>
+                    <div class="guide-item" onclick="showDetailedGuide('power-outages')">
+                        <div class="guide-icon">💡</div>
+                        <div class="guide-name">Power Outages</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Empty screen for navigation -->
+        <div class="screen" style="background: #1a1a2e;"></div>
+    </div>
+    
+    <!-- Guide Detail Modal -->
+    <div class="guide-modal" id="guideModal">
+        <div class="guide-content">
+            <div class="guide-header" id="guideHeader">
+                <!-- Content filled by JavaScript -->
+            </div>
+            <div class="guide-steps" id="guideSteps">
+                <!-- Content filled by JavaScript -->
+            </div>
+            <button class="close-btn" onclick="closeGuide()">
+                Close Guide
+            </button>
+        </div>
+    </div>
+    
+    <!-- Navigation Dots -->
+    <div class="nav-dots">
+        <div class="dot active" onclick="goToScreen(0)"></div>
+        <div class="dot" onclick="goToScreen(1)"></div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <button class="emergency-contacts-btn" onclick="manageContacts()">
+            <i class="fas fa-address-book"></i> Emergency Contacts
+        </button>
+    </div>
+
+    <script>
+        // Current screen index (0 = guide)
+        let currentScreen = 0;
+        const screenContainer = document.getElementById('screenContainer');
+        const dots = document.querySelectorAll('.dot');
+        const guideModal = document.getElementById('guideModal');
+        
+        // All Emergency Guides Data
+        const emergencyGuides = {
+            // Medical Emergencies
+            'allergic': {
+                title: 'Allergic Reactions',
+                icon: '🤧',
+                steps: [
+                    'Call emergency services if breathing is difficult',
+                    'Help person use epinephrine auto-injector if available',
+                    'Loosen tight clothing',
+                    'Lie person flat if breathing is difficult',
+                    'Do not give antihistamines for severe reactions',
+                    'Stay with person until help arrives'
+                ]
+            },
+            'food-poisoning': {
+                title: 'Food Poisoning',
+                icon: '🤢',
+                steps: [
+                    'Stop eating the suspected food',
+                    'Drink small sips of water or oral rehydration solution',
+                    'Rest and avoid solid foods',
+                    'Seek medical help if symptoms are severe',
+                    'Keep a sample of suspected food if possible',
+                    'Do not take anti-diarrhea medication'
+                ]
+            },
+            'abdominal-cramps': {
+                title: 'Abdominal Cramps',
+                icon: '🤕',
+                steps: [
+                    'Rest in comfortable position',
+                    'Apply warm compress to abdomen',
+                    'Drink clear fluids',
+                    'Avoid solid foods initially',
+                    'Seek medical help if pain is severe',
+                    'Do not give pain medication without doctor advice'
+                ]
+            },
+            'seizures': {
+                title: 'Seizures',
+                icon: '⚡',
+                steps: [
+                    'Clear area of dangerous objects',
+                    'Cushion the head with soft material',
+                    'Turn person on their side (recovery position)',
+                    'Time the seizure duration',
+                    'Stay with person until fully alert',
+                    'Call emergency if seizure lasts over 5 minutes'
+                ]
+            },
+            'asthma': {
+                title: 'Asthma Attack',
+                icon: '😮‍💨',
+                steps: [
+                    'Help person sit upright',
+                    'Assist with inhaler if available',
+                    'Loosen tight clothing',
+                    'Stay calm and reassure the person',
+                    'Call emergency if breathing doesn\'t improve',
+                    'Monitor until help arrives'
+                ]
+            },
+            
+            // Injury & Trauma
+            'bleeding': {
+                title: 'Severe Bleeding',
+                icon: '🩸',
+                steps: [
+                    'Put on gloves if available',
+                    'Apply direct pressure with clean cloth',
+                    'Elevate injured area above heart level',
+                    'Apply pressure to pressure points if needed',
+                    'Cover wound with sterile dressing',
+                    'Do not remove soaked dressings - add more on top'
+                ]
+            },
+            'fractures': {
+                title: 'Fractures',
+                icon: '🦴',
+                steps: [
+                    'Keep injured area still',
+                    'Support limb above and below fracture',
+                    'Apply ice pack wrapped in cloth',
+                    'Elevate limb if possible',
+                    'Immobilize with splint if trained',
+                    'Get medical help immediately'
+                ]
+            },
+            'burns': {
+                title: 'Burns',
+                icon: '🔥',
+                steps: [
+                    'Cool burn under cool running water for 20 minutes',
+                    'Remove jewelry near burn area',
+                    'Cover with sterile non-stick dressing',
+                    'Do not burst blisters',
+                    'Take pain relief if needed',
+                    'Seek medical help for serious burns'
+                ]
+            },
+            'cpr': {
+                title: 'CPR Guidance',
+                icon: '💓',
+                steps: [
+                    'Check responsiveness - tap and shout',
+                    'Call emergency services immediately',
+                    'Place hands in center of chest',
+                    'Give 30 chest compressions (2 inches deep)',
+                    'Give 2 rescue breaths',
+                    'Continue until help arrives or person recovers'
+                ]
+            },
+            'choking': {
+                title: 'Choking',
+                icon: '🗣️',
+                steps: [
+                    'Ask "Are you choking?"',
+                    'If they can cough, encourage coughing',
+                    'Give 5 back blows between shoulder blades',
+                    'If still choking, give 5 abdominal thrusts',
+                    'Continue until object dislodged',
+                    'Call emergency if person becomes unconscious'
+                ]
+            },
+            
+            // Safety & Security
+            'theft': {
+                title: 'Theft Response',
+                icon: '💰',
+                steps: [
+                    'Move to safe location immediately',
+                    'Call police to report theft',
+                    'Cancel credit cards if stolen',
+                    'Contact bank about stolen cards',
+                    'File police report for insurance',
+                    'Monitor accounts for suspicious activity'
+                ]
+            },
+            'assault': {
+                title: 'Assault Response',
+                icon: '👊',
+                steps: [
+                    'Get to safety immediately',
+                    'Call emergency services',
+                    'Preserve evidence if possible',
+                    'Seek medical attention',
+                    'Report to authorities',
+                    'Contact support services'
+                ]
+            },
+            'harassment': {
+                title: 'Harassment Response',
+                icon: '⚠️',
+                steps: [
+                    'Clearly say "STOP"',
+                    'Move to public area',
+                    'Document incidents with details',
+                    'Report to authorities',
+                    'Block contact if possible',
+                    'Seek support from trusted people'
+                ]
+            },
+            'suspicious': {
+                title: 'Suspicious Behavior',
+                icon: '👁️',
+                steps: [
+                    'Trust your instincts',
+                    'Move to populated area',
+                    'Call emergency if in danger',
+                    'Note descriptions and details',
+                    'Avoid confrontation',
+                    'Report to authorities'
+                ]
+            },
+            
+            // Disasters & Accidents
+            'transport-accidents': {
+                title: 'Transport Accidents',
+                icon: '🚗',
+                steps: [
+                    'Check for immediate danger',
+                    'Call emergency services',
+                    'Turn off vehicle ignition',
+                    'Administer first aid if trained',
+                    'Move to safe location if possible',
+                    'Exchange information with others involved'
+                ]
+            },
+            'fire': {
+                title: 'Fire Emergency',
+                icon: '🧯',
+                steps: [
+                    'Sound fire alarm immediately',
+                    'Evacuate building quickly',
+                    'Stay low to avoid smoke',
+                    'Feel doors before opening',
+                    'Use stairs, not elevators',
+                    'Meet at designated assembly point'
+                ]
+            },
+            'floods': {
+                title: 'Flood Emergency',
+                icon: '🌊',
+                steps: [
+                    'Move to higher ground immediately',
+                    'Avoid walking through floodwater',
+                    'Turn off electricity at main switch',
+                    'Listen to emergency broadcasts',
+                    'Do not drive through flooded areas',
+                    'Evacuate if instructed'
+                ]
+            },
+            'gas-leaks': {
+                title: 'Gas Leak Response',
+                icon: '💨',
+                steps: [
+                    'Evacuate building immediately',
+                    'Do not use electrical switches or phones',
+                    'Do not light matches or cigarettes',
+                    'Call emergency from outside',
+                    'Wait for professionals to declare safe',
+                    'Ventilate area if safe to do so'
+                ]
+            },
+            'building-collapse': {
+                title: 'Building Collapse',
+                icon: '🏗️',
+                steps: [
+                    'Cover mouth with cloth to avoid dust',
+                    'Tap on pipes or walls for rescue',
+                    'Conserve energy and stay calm',
+                    'Use whistle if available',
+                    'Avoid shouting unnecessarily',
+                    'Follow rescue team instructions'
+                ]
+            },
+            'power-outages': {
+                title: 'Power Outages',
+                icon: '💡',
+                steps: [
+                    'Use flashlight, not candles',
+                    'Unplug sensitive electronics',
+                    'Keep refrigerator closed',
+                    'Check on neighbors',
+                    'Report outage to utility company',
+                    'Have emergency kit ready'
+                ]
+            }
+        };
+        
+        // SWIPE FUNCTIONALITY
+        let startX = 0;
+        let endX = 0;
+        
+        screenContainer.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+        
+        screenContainer.addEventListener('touchmove', function(e) {
+            endX = e.touches[0].clientX;
+        });
+        
+        screenContainer.addEventListener('touchend', function() {
+            const difference = startX - endX;
+            
+            if (Math.abs(difference) > 50) {
+                if (difference > 0 && currentScreen < 1) {
+                    goToScreen(currentScreen + 1);
+                } else if (difference < 0 && currentScreen > 0) {
+                    goToScreen(currentScreen - 1);
+                }
+            }
+        });
+        
+        // For mouse drag on computers
+        screenContainer.addEventListener('mousedown', function(e) {
+            startX = e.clientX;
+            document.addEventListener('mousemove', mouseMove);
+            document.addEventListener('mouseup', mouseUp);
+        });
+        
+        function mouseMove(e) {
+            endX = e.clientX;
+        }
+        
+        function mouseUp() {
+            const difference = startX - endX;
+            
+            if (Math.abs(difference) > 50) {
+                if (difference > 0 && currentScreen < 1) {
+                    goToScreen(currentScreen + 1);
+                } else if (difference < 0 && currentScreen > 0) {
+                    goToScreen(currentScreen - 1);
+                }
+            }
+            
+            document.removeEventListener('mousemove', mouseMove);
+            document.removeEventListener('mouseup', mouseUp);
+        }
+        
+        // Function to go to specific screen
+        function goToScreen(screenIndex) {
+            currentScreen = screenIndex;
+            screenContainer.style.transform = `translateX(-${screenIndex * 50}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === screenIndex);
+            });
+        }
+        
+        // Go to home screen
+        function goToHome() {
+            // In a real app, this would navigate to home.html
+            window.location.href = 'home.html';
+        }
+        
+        // Show detailed guide in modal
+        function showDetailedGuide(guideId) {
+            const guide = emergencyGuides[guideId];
+            if (!guide) return;
+            
+            document.getElementById('guideHeader').innerHTML = `
+                <div style="font-size: 48px; margin-bottom: 10px;">${guide.icon}</div>
+                <h2 class="guide-title">${guide.title}</h2>
+                <p>Emergency Response Guide</p>
+            `;
+            
+            document.getElementById('guideSteps').innerHTML = `
+                <h3 style="color: #4fc3f7; margin-bottom: 15px;">Steps to Follow:</h3>
+                ${guide.steps.map((step, index) => `
+                    <div class="step-item">
+                        <strong>Step ${index + 1}:</strong> ${step}
+                    </div>
+                `).join('')}
+                <div style="margin-top: 20px; padding: 15px; background: rgba(255,0,0,0.1); border-radius: 10px;">
+                    <strong>⚠️ Emergency Alert:</strong> Call 112 immediately for serious emergencies!
+                </div>
+            `;
+            
+            guideModal.style.display = 'block';
+        }
+        
+        // Show guide by category
+        function showGuide(category) {
+            alert(`Showing ${category} guides`);
+        }
+        
+        // Close guide modal
+        function closeGuide() {
+            guideModal.style.display = 'none';
+        }
+        
+        // Click outside modal to close
+        guideModal.addEventListener('click', function(e) {
+            if (e.target === guideModal) {
+                closeGuide();
+            }
+        });
+        
+        // Button functions
+        function manageContacts() {
+            alert('Emergency contacts screen coming soon!');
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' && currentScreen < 1) {
+                goToScreen(currentScreen + 1);
+            } else if (e.key === 'ArrowLeft' && currentScreen > 0) {
+                goToScreen(currentScreen - 1);
+            }
+            else if (e.key === 'Escape') {
+                closeGuide();
+            }
+            else if (e.key === 'h' || e.key === 'H') {
+                goToHome();
+            }
+        });
+        
+        // Search functionality
+        function searchGuides() {
+            const searchTerm = prompt('Search for a guide:').toLowerCase();
+            if (!searchTerm) return;
+            
+            const matchingGuides = Object.keys(emergencyGuides).filter(key => 
+                emergencyGuides[key].title.toLowerCase().includes(searchTerm)
+            );
+            
+            if (matchingGuides.length > 0) {
+                showDetailedGuide(matchingGuides[0]);
+            } else {
+                alert('No guides found matching: ' + searchTerm);
+            }
+        }
+        
+        // Add search button to guide screen
+        document.querySelector('.guide-screen').insertAdjacentHTML('afterbegin', 
+            `<button onclick="searchGuides()" style="background: #4fc3f7; color: white; border: none; padding: 10px; border-radius: 10px; margin-bottom: 15px; width: 100%; cursor: pointer;">
+                🔍 Search Guides
+            </button>`
+        );
+    </script>
+</body>
+</html>
