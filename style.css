@@ -1,11 +1,27 @@
-/* This is the styling file */
+* =========================================
+   1. GLOBAL RESET & BASICS
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: Arial, sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Background for App Pages (Home, Guide, Profile) */
+body.app-page {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+    min-height: 100vh;
+    padding-bottom: 80px; /* Space for bottom nav */
+}
+
+/* Background for Auth Pages (Index, Login) */
+body.auth-page {
     background: #f0f2f5;
     display: flex;
     justify-content: center;
@@ -13,22 +29,21 @@ body {
     height: 100vh;
 }
 
-.container {
+/* =========================================
+   2. AUTH STYLES (Index & Login)
+   ========================================= */
+.container, .login-container {
     background: white;
     width: 350px;
-    height: 600px;
     border-radius: 30px;
     padding: 30px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    position: relative;
 }
 
-.logo {
-    margin-top: 50px;
-}
-
-.icon {
-    background: #4a6fa5;
+.icon, .login-logo {
+    background: hsl(216, 38%, 47%);
     width: 80px;
     height: 80px;
     border-radius: 20px;
@@ -39,46 +54,201 @@ body {
     font-size: 40px;
 }
 
-.app-name {
-    color: #2c3e50;
-    font-size: 24px;
-}
+.app-name { color: #2c3e50; font-size: 24px; }
+.main-title { color: #2c3e50; font-size: 40px; font-weight: bold; }
 
-.welcome-box {
-    margin: 80px 0;
-}
-
-.welcome-box h2 {
-    color: #7f8c8d;
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.main-title {
-    color: #2c3e50;
-    font-size: 48px;
-    font-weight: bold;
-}
-
-.continue-btn {
+.login-btn, .continue-btn {
     background: #4a6fa5;
     color: white;
     border: none;
-    padding: 18px 40px;
+    padding: 18px;
     font-size: 18px;
     border-radius: 50px;
     cursor: pointer;
-    margin-top: 40px;
     width: 100%;
     font-weight: bold;
+    margin-top: 20px;
+}
+.login-btn:hover, .continue-btn:hover { background: #3a5a80; }
+
+.input-group { margin-bottom: 20px; text-align: left; }
+.input-group label { display: block; color: #2c3e50; margin-bottom: 8px; font-weight: bold; }
+.input-group input { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; }
+
+.back-btn {
+    position: absolute; top: 20px; left: 20px; background: none; border: none; font-size: 24px; cursor: pointer; color: #4a6fa5;
 }
 
-.continue-btn:hover {
-    background: #3a5a80;
+/* =========================================
+   3. HOME DASHBOARD (Map & Actions)
+   ========================================= */
+.page-header {
+    padding: 20px;
+    text-align: center;
 }
 
-.footer {
-    color: #95a5a6;
+.dashboard-container {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ================= MAP ================= */
+.map-container {
+    width: 100%;
+    height: 250px;
+    background: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    border: 2px solid rgba(255,255,255,0.1);
+}
+
+.map-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ================= SOS BUTTON ================= */
+.sos-section {
+    margin-bottom: 35px;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* TRUE CENTER */
+}
+
+.sos-circle {
+    width: 220px;
+    height: 80px;
+    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    border-radius: 40px; /* CURVED RECTANGLE */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+    transition: transform 0.2s;
+}
+
+.sos-circle:active {
+    transform: scale(0.96);
+}
+
+.sos-icon {
+    font-size: 28px;
+}
+
+.sos-label {
+    font-size: 20px;
+}
+
+/* ================= ACTION BUTTONS ================= */
+.action-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+/* SMALL SQUARE BUTTONS */
+.emergency-btn {
+    height: 90px;
+    padding: 10px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
     font-size: 14px;
-    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    text-decoration: none;
 }
+
+.emergency-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+
+/* =========================================
+   4. FIRST AID PAGE
+   ========================================= */
+.search-container { padding: 0 20px 20px; }
+.guide-search-box {
+    width: 100%; padding: 15px; border-radius: 10px; border: none;
+    font-size: 16px; background: rgba(255, 255, 255, 0.9);
+}
+
+.guide-content-area { padding: 0 20px; }
+.category-section { margin-bottom: 25px; }
+.category-title {
+    color: #4fc3f7; border-bottom: 2px solid #4fc3f7;
+    margin-bottom: 15px; padding-bottom: 5px; font-size: 18px;
+}
+.guide-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.guide-item {
+    background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;
+    text-align: center; cursor: pointer; transition: 0.3s;
+}
+.guide-item:hover { background: rgba(255,255,255,0.15); transform: translateY(-3px); }
+.guide-icon { font-size: 30px; display: block; margin-bottom: 5px; }
+.guide-name { font-size: 14px; color: #ddd; }
+
+/* Modal */
+.modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.9); z-index: 2000; padding: 20px; overflow-y: auto;
+}
+.modal-box {
+    background: #1a1a2e; border: 2px solid #4fc3f7; border-radius: 20px;
+    padding: 25px; margin-top: 50px; color: white;
+}
+.step-item { margin-bottom: 15px; padding-left: 10px; border-left: 3px solid #4fc3f7; line-height: 1.4; }
+.close-modal-btn {
+    width: 100%; padding: 12px; background: #ff4444; color: white;
+    border: none; border-radius: 10px; margin-top: 20px; font-size: 16px; cursor: pointer;
+}
+
+/* =========================================
+   5. PROFILE PAGE
+   ========================================= */
+.profile-card {
+    background: rgba(255,255,255,0.1); border-radius: 20px; padding: 25px; margin: 20px;
+}
+.profile-avatar {
+    width: 100px; height: 100px; background: #4a6fa5; border-radius: 50%;
+    margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 40px;
+}
+.profile-row {
+    display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 15px 0;
+}
+.profile-row:last-child { border-bottom: none; }
+.label { color: #aaa; }
+.value { font-weight: bold; }
+
+/* =========================================
+   6. BOTTOM NAVIGATION
+   ========================================= */
+.bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0; height: 70px;
+    background: #1a1a2e; border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex; justify-content: space-around; align-items: center;
+    z-index: 1000; box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+}
+.nav-link {
+    color: #7f8c8d; text-decoration: none; display: flex;
+    flex-direction: column; align-items: center; font-size: 12px;
+}
+.nav-link i { font-size: 24px; margin-bottom: 5px; }
+.nav-link.active { color: #4fc3f7; }
+
+
