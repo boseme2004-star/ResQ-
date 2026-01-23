@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResQ+ - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PWA Meta Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1a1a2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ResQ+">
+
+<!-- Icons -->
+<link rel="icon" href="icons/icon-192x192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/icon-192x192.png">
+
+<!-- Manifest -->
+<link rel="manifest" href="manifest.json">
+</head>
+<body class="app-page">
+    <div class="page-header">
+        <h2>Emergency Dashboard</h2>
+        <p class="subtitle">
+            <i class="fas fa-map-marker-alt"></i> Emana, Yaoundé
+        </p>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="map-container">
+            <iframe class="map-iframe" 
+                src="https://www.openstreetmap.org/export/embed.html?bbox=11.5000,3.8500,11.5500,3.9000&layer=mapnik" 
+                loading="lazy">
+            </iframe>
+        </div>
+
+        <div class="sos-section">
+            <div class="sos-circle" id="sosButton" onclick="triggerSOS()">
+                <div class="sos-content">
+                    <i class="fas fa-exclamation-triangle sos-icon"></i>
+                    <span class="sos-label">SOS</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-grid">
+            <button class="emergency-btn" onclick="findHospitals()">
+                <i class="fas fa-hospital"></i>
+                <span>Nearby Hospitals</span>
+            </button>
+            
+            <a href="tel:117" class="emergency-btn">
+                <i class="fas fa-shield-alt"></i>
+                <span>Call Police (117)</span>
+            </a>
+            
+            <a href="tel:118" class="emergency-btn">
+                <i class="fas fa-fire-extinguisher"></i>
+                <span>Firefighters (118)</span>
+            </a>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-link active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="history.html" class="nav-link">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+        </a>
+        <a href="firstaid.html" class="nav-link">
+            <i class="fas fa-kit-medical"></i>
+            <span>First Aid</span>
+        </a>
+        <a href="profile.html" class="nav-link">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>

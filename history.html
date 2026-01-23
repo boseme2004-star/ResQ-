@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResQ+ - History</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PWA Meta Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1a1a2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ResQ+">
+
+<!-- Icons -->
+<link rel="icon" href="icons/icon-192x192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/icon-192x192.png">
+
+<!-- Manifest -->
+<link rel="manifest" href="manifest.json">
+</head>
+<body class="app-page">
+    <div class="page-header">
+        <h2>SOS History</h2>
+        <p class="subtitle">Record of emergency alerts</p>
+    </div>
+
+    <div class="history-container">
+        <div class="history-card">
+            <h3 class="history-title"><i class="fas fa-history"></i> Emergency Events</h3>
+            
+            <div id="historyList">
+                <!-- History items will be loaded by JavaScript -->
+                <div class="empty-history">
+                    <i class="fas fa-history"></i>
+                    <p>No SOS events recorded yet</p>
+                    <p class="empty-sub">Press the SOS button on home page to create your first event</p>
+                </div>
+            </div>
+            
+            <div class="history-actions">
+                <button class="history-btn clear-btn" onclick="clearHistory()">
+                    <i class="fas fa-trash"></i> Clear All History
+                </button>
+                <button class="history-btn refresh-btn" onclick="loadHistory()">
+                    <i class="fas fa-sync"></i> Refresh
+                </button>
+            </div>
+        </div>
+        
+        <div class="history-info">
+            <i class="fas fa-info-circle"></i>
+            SOS events are automatically saved when you press the SOS button
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="history.html" class="nav-link active">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+        </a>
+        <a href="firstaid.html" class="nav-link">
+            <i class="fas fa-kit-medical"></i>
+            <span>First Aid</span>
+        </a>
+        <a href="profile.html" class="nav-link">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>

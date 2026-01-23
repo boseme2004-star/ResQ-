@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResQ+ - Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PWA Meta Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1a1a2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ResQ+">
+
+<!-- Icons -->
+<link rel="icon" href="icons/icon-192x192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/icon-192x192.png">
+
+<!-- Manifest -->
+<link rel="manifest" href="manifest.json">
+</head>
+<body class="app-page">
+    <div class="page-header">
+        <h2>My Profile</h2>
+        <p class="subtitle">Emergency information</p>
+    </div>
+
+    <div class="profile-card">
+        <div class="profile-avatar">
+            <i class="fas fa-user"></i>
+        </div>
+        
+        <div class="profile-row">
+            <span class="label">Name:</span>
+            <span id="profileName" class="value">Boseme Mbile</span>
+        </div>
+        <div class="profile-row">
+            <span class="label">Age:</span>
+            <span id="profileAge" class="value">Loading...</span>
+        </div>
+        <div class="profile-row">
+            <span class="label">Gender:</span>
+            <span id="profileGender" class="value">Loading...</span>
+        </div>
+        <div class="profile-row">
+            <span class="label">Blood Type:</span>
+            <span id="profileBlood" class="value">O+</span>
+        </div>
+        <div class="profile-row">
+            <span class="label">Allergies:</span>
+            <span id="profileAllergies" class="value">None</span>
+        </div>
+        <div class="profile-row">
+            <span class="label">Medical Conditions:</span>
+            <span id="profileConditions" class="value">None</span>
+        </div>
+        <div class="profile-row">
+            <span class="label">Emergency Contact:</span>
+            <span id="profileContact" class="value">Nurse (683-456-112)</span>
+        </div>
+        <div class="profile-row">
+            <span class="label">Address:</span>
+            <span id="profileAddress" class="value">Loading...</span>
+        </div>
+    </div>
+
+    <div class="profile-actions">
+        <button class="profile-btn edit-btn" onclick="editProfile()">
+            <i class="fas fa-edit"></i> Edit Profile
+        </button>
+        <button class="profile-btn logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Log Out
+        </button>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-link">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="history.html" class="nav-link">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+        </a>
+        <a href="firstaid.html" class="nav-link">
+            <i class="fas fa-kit-medical"></i>
+            <span>First Aid</span>
+        </a>
+        <a href="profile.html" class="nav-link active">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
