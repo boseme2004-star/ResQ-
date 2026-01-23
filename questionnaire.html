@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResQ+ - Questionnaire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PWA Meta Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1a1a2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ResQ+">
+
+<!-- Icons -->
+<link rel="icon" href="icons/icon-192x192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/icon-192x192.png">
+
+<!-- Manifest -->
+<link rel="manifest" href="manifest.json">
+</head>
+<body class="app-page">
+    <div class="page-header">
+        <h2>Emergency Profile Setup</h2>
+        <p class="subtitle">Please fill in your details for emergency situations</p>
+    </div>
+
+    <div class="questionnaire-container">
+        <div class="questionnaire-card">
+            <h3 class="question-title"><i class="fas fa-user-circle"></i> Personal Information</h3>
+            
+            <div class="form-group">
+                <label><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" id="fullName" placeholder="Enter your full name">
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group half">
+                    <label><i class="fas fa-birthday-cake"></i> Age</label>
+                    <input type="number" id="age" placeholder="Age" min="1" max="120">
+                </div>
+                
+                <div class="form-group half">
+                    <label><i class="fas fa-venus-mars"></i> Gender</label>
+                    <select id="gender">
+                        <option value="">Select...</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-home"></i> Address</label>
+                <textarea id="address" placeholder="Enter your home address"></textarea>
+            </div>
+            
+            <h3 class="question-title"><i class="fas fa-heartbeat"></i> Medical Information</h3>
+            
+            <div class="form-group">
+                <label><i class="fas fa-tint"></i> Blood Group</label>
+                <select id="bloodGroup">
+                    <option value="">Select blood type</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="Unknown">Don't know</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-allergies"></i> Allergies</label>
+                <textarea id="allergies" placeholder="List any allergies (e.g., Penicillin, Peanuts, Dust)"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-file-medical"></i> Medical Conditions</label>
+                <textarea id="conditions" placeholder="List any medical conditions (e.g., Diabetes, Asthma, Heart Disease)"></textarea>
+            </div>
+            
+            <h3 class="question-title"><i class="fas fa-phone-alt"></i> Emergency Contact</h3>
+            
+            <div class="form-group">
+                <label><i class="fas fa-user-friends"></i> Contact Name</label>
+                <input type="text" id="emergencyName" placeholder="Emergency contact name">
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-phone"></i> Contact Phone</label>
+                <input type="tel" id="emergencyPhone" placeholder="Phone number">
+            </div>
+            
+            <button class="submit-questionnaire" onclick="saveQuestionnaire()">
+                <i class="fas fa-save"></i> Save & Continue to Dashboard
+            </button>
+        </div>
+        
+        <div class="info-note">
+            <i class="fas fa-info-circle"></i>
+            This information will be used in emergency situations to provide better assistance.
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
